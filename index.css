@@ -1,0 +1,31 @@
+.cell {
+    height: 100px;
+    width: 100px;
+    text-align: center;
+}
+
+.cellHeader {
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+}
+
+#centering {
+    padding: 10px 0;
+    text-align: center;
+}
+
+body {
+    font-family: 'Kulim Park', sans-serif;
+}
+
+#table {
+    border-collapse: collapse;
+    border: 3px solid black;
+}
+
+th {
+    border-bottom: 3px solid black;
+    border-left: none;
+    border-right: none;
+}
