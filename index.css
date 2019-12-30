@@ -14,7 +14,6 @@
 #centering {
     padding: 10px 0;
     text-align: center;
-    border: 2px solid green;
 }
 
 body {
@@ -24,7 +23,7 @@ body {
 #table {
     border-collapse: collapse;
     border: 3px solid black;
-    width: 100%;
+    width: 90%;
 }
 
 th {
@@ -32,4 +31,22 @@ th {
     border-left: none;
     border-right: none;
     height: 80px;
+}
+
+button {
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    border-radius: 12px;
+    padding: 5px;
+    background-color: white;
+    color: black;
+    border: 1px solid black; /* Green */
+}
+
+button:hover {
+    background-color: #eaea00; /* Green */
+}
+
+button:focus {
+    background-color: #eaea00; /* Green */
 }
