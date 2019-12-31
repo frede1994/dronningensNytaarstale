@@ -8,11 +8,19 @@ var rows = 5;
 var columns = 2;
 
 var ord1 = ['Nytårsaften', 'Verden', 'Soldater', 'Kronprinsparret', 'Nytårshilsen', '2019', '2020', 'Kronprinsen', 'Nytårsønsker', 'Kronprinsessen', 'Unge', 'Klimaet', 'Prins Joachim', 'Gamle', 'Prinsesse Benedikte', 'Argentina', 'Arbejde', 'Europa', 'Glæde', 'Muligheder', 'Køge', 'Nyborg', 'Børnebørn', 'Sommer', 'Sydslesvig', 'Generationer', 'Politiet', 'Folk', 'Ansvar', 'Prinsesse Marie', 'Genforeningen', 'Grænsen', 'Tallinn', 'Flag', 'Mindretal', 'Sikkerhed'];
-var ord2 = ['Krig', 'Vejret', 'Flygtninge', 'Fred', 'Estland', 'Slesvig-Holsten', 'Særligt', 'Fællesskab', 'Klima', 'Frankrig', 'Dannebrog', 'Omsorg', 'Klimaforandringer', 'Jul', 'Kongeskibet', 'Sorg', 'Kronprins Frederik', 'Politi', 'Fødselsdag', 'Økonomiske'];
-var ord3 = ['Kongehuset', 'Kronprinsesse Mary', 'Dagligdagen', 'Forventninger', 'Royal Run', 'Terror', 'Kærlighed', 'Alvor', 'Tilbageblik', 'Rådhusklokkerne', 'Stunder', 'Rigsfællesskabet', 'Krise', 'Stolt', 'Sociale medier'];
+var ord2 = ['Krig', 'Vejret', 'Flygtninge', 'Fred', 'Estland', 'Slesvig-Holsten', 'Særligt', 'Fællesskab', 'Klima', 'Frankrig', 'Dannebrog', 'Omsorg', 'Klimaforandringer', 'Jul', 'Kongeskibet', 'Sorg', 'Kronprins Frederik', 'Politi', 'Fødselsdag'];
+var ord3 = ['Økonomiske', 'Kongehuset', 'Kronprinsesse Mary', 'Dagligdagen', 'Forventninger', 'Royal Run', 'Terror', 'Kærlighed', 'Alvor', 'Tilbageblik', 'Rådhusklokkerne', 'Stunder', 'Rigsfællesskabet', 'Krise', 'Stolt', 'Sociale medier', 'Atter'];
 var usedWords = [];
+var myWords = [];
 
+findWords();
 tableCreate();
+
+function findWords() {
+    for (i=0; i < numberOfWords; i++) {
+        myWords.push(randomWord(1));
+    }
+}
 
 function tableCreate() {
     usedWords = [];
@@ -27,14 +35,14 @@ function tableCreate() {
     for (var i = 1; i < tbl.rows.length; i++) {
         for (var j = 0; j < tbl.rows[i].cells.length; j++) {
             if (i === cellsToPopulate[j]) {
-                tbl.rows[i].cells[j].innerHTML = randomWord(1);
+                tbl.rows[i].cells[j].innerHTML = myWords.pop();
             }
         }
     }
 
     for (var k = 0; k < nrOfDoubleCells; k++) {
         var colAndRow = randomPlace();
-        tbl.rows[colAndRow[0]].cells[colAndRow[1]].innerHTML = randomWord(1);
+        tbl.rows[colAndRow[0]].cells[colAndRow[1]].innerHTML = myWords.pop();
     }
 
     checkTable()
@@ -44,7 +52,7 @@ function checkTable() {
     var tbl = document.getElementById('table');
     var nrOfRows = [];
     var cols = [];
-    for (var i = 1; i < tbl.rows.length; i++) {
+    for (var i = 0; i < tbl.rows.length; i++) {
         for (var j = 0; j < tbl.rows[i].cells.length; j++) {
             if (tbl.rows[i].cells[j].innerHTML !== "") {
                 nrOfRows.push(i);
@@ -57,9 +65,9 @@ function checkTable() {
     console.log(counts);
     console.log(counts.length);
     console.log("rows: " + rows);
-    if (Object.values(counts).length !== counts.length || counts.length < rows+1) { //rows +1 because of header
+    if (Object.values(counts).length !== counts.length || !$.inArray(0,counts) || counts.length < rows) {
         console.log("making new");
-        document.getElementById("newButton").click();
+        location.reload();
     }
     // if (Math.min.apply(Math, counts) < 1) {
     //     console.log("making new");
@@ -98,7 +106,7 @@ function randomPlace() {
     var tbl = document.getElementById("table");
     var arr = [];
     while (arr.length === 0) {
-        var row = randomNumber(rows); //first row is header
+        var row = randomNumber(rows)-1;
         var col = randomNumber(columns)-1;
         if (tbl.rows[row].cells[col].innerHTML === "") {
             arr.push(row);
@@ -108,10 +116,9 @@ function randomPlace() {
     return arr;
 }
 
-//COLOR ON CLICK
 var tbl = document.getElementById("table");
 if (tbl != null) {
-    for (var i = 1; i < tbl.rows.length; i++) {
+    for (var i = 0; i < tbl.rows.length; i++) {
         for (var j = 0; j < tbl.rows[i].cells.length; j++) {
             tbl.rows[i].cells[j].onclick = (function (i, j) {
                 return function () {
@@ -128,6 +135,7 @@ if (tbl != null) {
     }
 }
 
+
 var checkInterval = window.setInterval(checkForBingo, 1000);
 
 function checkForBingo() {
@@ -139,3 +147,15 @@ function checkForBingo() {
         confetti.stop();
     }
 }
+//
+// $(function(){
+//     $('.cell').click(function(e){
+//         var x = e.clientX;
+//         var y = e.clientY;
+//
+//         var circle=$('<div class="circle"></div>');
+//         circle.css('top',e.pageY - 15);
+//         circle.css('left',e.pageX - 15)
+//         $('#fx').append(circle);
+//     })
+// })

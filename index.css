@@ -28,9 +28,9 @@
     text-align: center;
     background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
     color: black;
-    border: 3px solid #f1f1f1;
+    border: 5px solid #00594c;
     position: absolute;
-    top: 30%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
@@ -41,7 +41,7 @@
 
 .bg-image {
     /* The image used */
-    background-image: url(majestaet.jpg);
+    background-image: url(dronning.png);
 
     /* Add the blur effect */
     filter: blur(8px);
@@ -62,27 +62,34 @@ body, html {
 }
 
 h1 {
-    color: white;
+    color: #00594c;
+    font-size: 90px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 10px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #eaea00;
+}
+
+h2 {
+    color: #00594c;
     font-size: 60px;
+    text-align: center;
+    margin: 0;
 }
 
-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    -webkit-transition-duration: 0.2s; /* Safari */
-    transition-duration: 0.2s;
-    border-radius: 12px;
-    padding: 5px;
-    background-color: white;
-    color: black;
-    border: 1px solid black; /* Green */
+h3 {
+    color: #00594c;
+    font-size: 15px;
+    text-align: right;
 }
 
-button:hover {
-    background-color: #eaea00; /* Green */
-}
-
-button:focus {
-    background-color: #eaea00; /* Green */
+.circle{
+    width: 30px;
+    height: 30px;
+    background: red;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    position:absolute;
 }
