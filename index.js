@@ -32,6 +32,8 @@ function findWords() {
 }
 
 function tableCreate() {
+    setDate();
+
     usedWords = [];
     var cellsToPopulate = [];
     var nrOfDoubleCells = numberOfWords - columns;
@@ -160,6 +162,12 @@ function checkForBingo() {
         confetti.stop();
     }
 }
+
+function setDate() {
+    var date = new Date();
+    document.getElementById("date").innerHTML = "Bingoplade hentet: " + date.toLocaleString('en-GB');
+}
+
 //
 // $(function(){
 //     $('.cell').click(function(e){
