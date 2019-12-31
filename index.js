@@ -28,6 +28,7 @@ function findWords() {
     } else {
         myWords.push(randomWord(3));
     }
+    console.log(myWords);
 }
 
 function tableCreate() {
@@ -38,9 +39,10 @@ function tableCreate() {
     for (i = 0; i < numberOfWords; i++) {
         cellsToPopulate.push(randomNumber(rows));
     }
+    console.log(cellsToPopulate);
 
     var tbl = document.getElementById('table');
-    for (var i = 1; i < tbl.rows.length; i++) {
+    for (var i = 0; i < tbl.rows.length; i++) {
         for (var j = 0; j < tbl.rows[i].cells.length; j++) {
             if (i === cellsToPopulate[j]) {
                 tbl.rows[i].cells[j].innerHTML = myWords.pop();
@@ -70,13 +72,11 @@ function checkTable() {
     }
     var counts = [0];
     nrOfRows.forEach(function(x) { counts[x] = (counts[x] || 0)+1; });
-    console.log(counts);
-    console.log(counts.length);
-    console.log("rows: " + rows);
-    if (Object.values(counts).length !== counts.length || !$.inArray(0,counts) || counts.length < rows) {
+    if (counts.reduce(function(acc, val) { return acc + val; }, 0) < numberOfWords || Object.values(counts).length !== counts.length || !$.inArray(0,counts) || counts.length < rows) {
         console.log("making new");
         location.reload();
     }
+
     // if (Math.min.apply(Math, counts) < 1) {
     //     console.log("making new");
     //     document.getElementById("newButton").click();
