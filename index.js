@@ -1,15 +1,17 @@
 var colorOff = "white";
-var colorOn = "yellow";
-var numberOfWords = 7;
+// var colorOn = 'rgb(0, 89, 76)';
+var colorOn = 'yellow';
 var shuffleNumber = 50;
 var numberOfCorrects = 0;
 var bingo = false;
 var rows = 5;
 var columns = 2;
+var numberOfWords = 7;
 
 var ord1 = ['Nytårsaften', 'Verden', 'Soldater', 'Kronprinsparret', 'Nytårshilsen', '2019', '2020', 'Kronprinsen', 'Nytårsønsker', 'Kronprinsessen', 'Unge', 'Klimaet', 'Prins Joachim', 'Gamle', 'Prinsesse Benedikte', 'Argentina', 'Arbejde', 'Europa', 'Glæde', 'Muligheder', 'Køge', 'Nyborg', 'Børnebørn', 'Sommer', 'Sydslesvig', 'Generationer', 'Politiet', 'Folk', 'Ansvar', 'Prinsesse Marie', 'Genforeningen', 'Grænsen', 'Tallinn', 'Flag', 'Mindretal', 'Sikkerhed'];
 var ord2 = ['Krig', 'Vejret', 'Flygtninge', 'Fred', 'Estland', 'Slesvig-Holsten', 'Særligt', 'Fællesskab', 'Klima', 'Frankrig', 'Dannebrog', 'Omsorg', 'Klimaforandringer', 'Jul', 'Kongeskibet', 'Sorg', 'Kronprins Frederik', 'Politi', 'Fødselsdag'];
 var ord3 = ['Økonomiske', 'Kongehuset', 'Kronprinsesse Mary', 'Dagligdagen', 'Forventninger', 'Royal Run', 'Terror', 'Kærlighed', 'Alvor', 'Tilbageblik', 'Rådhusklokkerne', 'Stunder', 'Rigsfællesskabet', 'Krise', 'Stolt', 'Sociale medier', 'Atter'];
+var bonusOrd = ["Facebook", "Privatliv", "EU", "Nedbørsrekord", "Landsholdet", "Fodboldlandsholdet", "Norge", "Økonomi", "Statsministeren", "Bryllup", "Krone", "Online", "Farmor", "Ligheder", "Penge", "Folketinget", "Guld", "Time", "Minut", "Cityring", "Begavet", "Fejltagelse", "Familiær", "Hjerterum", "Blomster", "Storm", "Søens folk", "Bemærkninger", "E-Sport", "Likes", "Eventyr", "Livgarden", "Beklager", "Erhvervslivet", "Metro", "Sverige", "Notre Dame", "El-løbehjul", "Håndtryk", "Herrelandsholdet", "Rusland", "Skyderi", "Asyl", "Teenager", "Krisetid", "Julekalender", "Uanset hvad", "Brexit", "Instagram", "Indlandsisen", "Uafhængighed", "Grådighed", "Hvid jul", "Influencer", "Smartphone", "Ipad", "Verdensmålene", "Motionsløb", "Madspild", "Begge sider", "Greta Thunberg"];
 var usedWords = [];
 var myWords = [];
 
@@ -17,8 +19,14 @@ findWords();
 tableCreate();
 
 function findWords() {
-    for (i=0; i < numberOfWords; i++) {
+    for (i=2; i < numberOfWords; i++) {
         myWords.push(randomWord(1));
+    }
+    myWords.push(randomWord(2));
+    if (Math.floor(Math.random() * 10) > 7) {
+        myWords.push(randomWord(4));
+    } else {
+        myWords.push(randomWord(3));
     }
 }
 
@@ -94,6 +102,10 @@ function randomWord(category) {
         numberOfWords = ord3.length;
         ordArray = ord3;
     }
+    if (category === 4) {
+        numberOfWords = bonusOrd.length;
+        ordArray = bonusOrd;
+    }
     var word = ordArray[Math.floor(Math.random() * numberOfWords)];
     while (usedWords.indexOf(word) > -1) {
         word = ordArray[Math.floor(Math.random() * numberOfWords)];
@@ -122,6 +134,7 @@ if (tbl != null) {
         for (var j = 0; j < tbl.rows[i].cells.length; j++) {
             tbl.rows[i].cells[j].onclick = (function (i, j) {
                 return function () {
+                    console.log(tbl.rows[i].cells[j].style.backgroundColor);
                     if (tbl.rows[i].cells[j].style.backgroundColor === colorOn) {
                         tbl.rows[i].cells[j].style.backgroundColor = colorOff;
                         numberOfCorrects--;
